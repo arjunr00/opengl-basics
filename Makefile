@@ -6,11 +6,12 @@ SRC_DIR = src
 BUILD_DIR = build
 
 MAIN = $(SRC_DIR)/main.cpp
-MODULES = $(SRC_DIR)/glad.c
+MODULES = $(SRC_DIR)/Renderer.cpp
+LIBMODULES = $(SRC_DIR)/glad.c
 
 OUTPUT = $(BUILD_DIR)/opengl-tutorial
 
-$(OUTPUT): $(MAIN) $(MODULES)
+$(OUTPUT): $(MAIN) $(LIBMODULES) $(MODULES)
 	@mkdir -p build
 	@echo -n "Compiling program .. "
 	@$(COMPILER) $(CFLAGS) -o $(OUTPUT) $^ $(LDFLAGS)
