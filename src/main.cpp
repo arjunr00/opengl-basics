@@ -1,12 +1,12 @@
-#include "Renderer.hpp"
-
 #include <iostream>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <renderer/Renderer.hpp>
+
 int main() {
-  Renderer renderer;
+  Renderer renderer("OpenGL Tutorial", 800, 600);
 
   try {
       renderer.render();

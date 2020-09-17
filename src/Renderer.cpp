@@ -1,19 +1,19 @@
-#include "Renderer.hpp"
-
 #include <iostream>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <renderer/Renderer.hpp>
+
 /** Construcor */
-Renderer::Renderer() {
+Renderer::Renderer(const char *windowName, int width, int height) {
   // Initialize window
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   
-  this->window = glfwCreateWindow(800, 600, "OpenGL Tutorial", nullptr, nullptr);
+  this->window = glfwCreateWindow(width, height, windowName, nullptr, nullptr);
   if (this->window == nullptr) {
     std::cerr << "Failed to create GLFW window" << std::endl;
     glfwTerminate();

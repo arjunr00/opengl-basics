@@ -6,7 +6,7 @@
 
 class Renderer {
   public:
-    Renderer();
+    Renderer(const char *windowName, int width, int height);
     ~Renderer();
 
     void render();
