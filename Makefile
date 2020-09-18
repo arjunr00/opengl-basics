@@ -9,7 +9,7 @@ MAIN = $(SRC_DIR)/main.cpp
 MODULES = $(SRC_DIR)/Renderer.cpp $(SRC_DIR)/Mesh.cpp $(SRC_DIR)/Shader.cpp
 LIBMODULES = $(SRC_DIR)/glad.c
 
-OUTPUT = $(BUILD_DIR)/opengl-tutorial
+OUTPUT = $(BUILD_DIR)/opengl-basics
 
 $(OUTPUT): $(MAIN) $(LIBMODULES) $(MODULES)
 	@mkdir -p build

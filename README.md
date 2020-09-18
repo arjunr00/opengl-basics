@@ -9,6 +9,12 @@ Make sure [GLFW](https://www.glfw.org/) and [GLM](https://glm.g-truc.net/0.9.9/i
 Then, run `make` to generate the executable.
 Run `make clean` to remove all generated files.
 
+## How to run
+
+After building, just run `make test` or `./build/opengl-basics` from the root of this repository.
+
+Press Q to close the application. Press 1 to switch to filled mode and 2 to switch to wireframe mode.
+
 ## What it looks like
 ![opengl-gif](https://user-images.githubusercontent.com/30734384/93616932-5f2d2100-f9a3-11ea-8865-d6a88b084b03.gif)
 
