@@ -49,7 +49,7 @@ Mesh::Mesh(float *vertices, std::size_t numVertices,
  */
 
 void Mesh::draw() {
-  this->shader.use();
+  glUseProgram(this->shader.getShaderProgramObjId());
   glBindVertexArray(this->vertArrObj);
   glDrawElements(GL_TRIANGLES, this->numTriangles * 3, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);

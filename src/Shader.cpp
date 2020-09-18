@@ -21,8 +21,8 @@ Shader::Shader(std::ifstream *vertShaderFile, std::ifstream *fragShaderFile) {
  * PUBLIC METHODS
  */
 
-void Shader::use() {
-  glUseProgram(this->shaderProgram);
+unsigned int Shader::getShaderProgramObjId() {
+  return this->shaderProgram;
 }
 
 /**
