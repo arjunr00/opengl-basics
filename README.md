@@ -16,8 +16,7 @@ After building, just run `make test` or `./build/opengl-basics` from the root of
 Press Q to close the application. Press 1 to switch to filled mode and 2 to switch to wireframe mode.
 
 ## What it looks like
-![opengl-gif](https://user-images.githubusercontent.com/30734384/93616932-5f2d2100-f9a3-11ea-8865-d6a88b084b03.gif)
-
+![opengl-rect](https://user-images.githubusercontent.com/30734384/93632268-0ec1bd80-f9bb-11ea-8b75-ec928ca7a7fa.gif)
 
 ## Notes
 
