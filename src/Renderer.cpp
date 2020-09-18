@@ -4,8 +4,12 @@
 #include <GLFW/glfw3.h>
 
 #include <renderer/Renderer.hpp>
+#include <renderer/Shader.hpp>
+#include <renderer/Shape.hpp>
 
-/** Construcor */
+/**
+ * CONSTRUCTOR 
+ */
 Renderer::Renderer(const char *windowName, int width, int height) {
   // Initialize window
   glfwInit();
@@ -31,23 +35,37 @@ Renderer::Renderer(const char *windowName, int width, int height) {
   glfwSetFramebufferSizeCallback(this->window, this->framebufferSizeCallback);
 }
 
-/** Destructor */
+/**
+ * DESTRUCTOR
+ */
 Renderer::~Renderer() {
   glfwTerminate();
 }
 
+/**
+ * PUBLIC METHODS
+ */
+
 /** Render loop */
-void Renderer::render() {
+void Renderer::render(Shape *shapes, std::size_t numShapes) {
+
   while (!glfwWindowShouldClose(window)) {
     this->processInput();
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
+    for (std::size_t i = 0; i < numShapes; ++i)
+      shapes[i].draw();
+
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
 }
+
+/**
+ * PRIVATE METHODS
+ */
 
 /** (static) Window resize callback */
 void Renderer::framebufferSizeCallback(GLFWwindow *window, int width, int height) {
@@ -57,6 +75,10 @@ void Renderer::framebufferSizeCallback(GLFWwindow *window, int width, int height
 }
 
 void Renderer::processInput() {
-  if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+  if (glfwGetKey(this->window, GLFW_KEY_Q) == GLFW_PRESS)
     glfwSetWindowShouldClose(this->window, true);
+  else if (glfwGetKey(this->window, GLFW_KEY_1) == GLFW_PRESS)
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+  else if (glfwGetKey(this->window, GLFW_KEY_2) == GLFW_PRESS)
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }

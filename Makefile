@@ -6,7 +6,7 @@ SRC_DIR = src
 BUILD_DIR = build
 
 MAIN = $(SRC_DIR)/main.cpp
-MODULES = $(SRC_DIR)/Renderer.cpp
+MODULES = $(SRC_DIR)/Renderer.cpp $(SRC_DIR)/Shape.cpp $(SRC_DIR)/Shader.cpp
 LIBMODULES = $(SRC_DIR)/glad.c
 
 OUTPUT = $(BUILD_DIR)/opengl-tutorial
