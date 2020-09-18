@@ -10,7 +10,8 @@ Then, run `make` to generate the executable.
 Run `make clean` to remove all generated files.
 
 ## What it looks like
-![Screenshot_20200917_225548](https://user-images.githubusercontent.com/30734384/93550307-1fc9ea80-f939-11ea-9d5e-9f428f3cf13b.png)
+![opengl-gif](https://user-images.githubusercontent.com/30734384/93616932-5f2d2100-f9a3-11ea-8865-d6a88b084b03.gif)
+
 
 ## Notes
 
