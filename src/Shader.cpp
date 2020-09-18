@@ -10,10 +10,10 @@
 /**
  * CONSTRUCTOR
  */
-Shader::Shader(std::ifstream *vertShaderFile, std::ifstream *fragShaderFile) {
+Shader::Shader(std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile) {
   std::stringstream vertShaderSrcBuf, fragShaderSrcBuf;
-  vertShaderSrcBuf << vertShaderFile->rdbuf();
-  fragShaderSrcBuf << fragShaderFile->rdbuf();
+  vertShaderSrcBuf << vertShaderFile.rdbuf();
+  fragShaderSrcBuf << fragShaderFile.rdbuf();
   this->compileShaders(vertShaderSrcBuf.str().c_str(), fragShaderSrcBuf.str().c_str());
 }
 

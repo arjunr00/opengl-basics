@@ -1,16 +1,16 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include <renderer/Shader.hpp>
-
 #include <cstddef>
 #include <fstream>
+#include <vector>
+
+#include <renderer/Shader.hpp>
 
 class Mesh {
   public:
-    Mesh(float *vertices, std::size_t numVertices,
-          unsigned int *indices, std::size_t numTriangles, 
-          std::ifstream *vertShaderFile, std::ifstream *fragShaderFile);
+    Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
+          std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile);
 
     void draw();
 

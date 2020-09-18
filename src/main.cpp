@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -9,13 +10,13 @@
 
 int main() {
   Renderer renderer("OpenGL Tutorial", 800, 600);
-  float vertices[] = {
+  std::vector<float> vertices = {
      0.5f,  0.5f, -0.5f,
      0.5f, -0.5f, 0.0f,
     -0.5f, -0.5f, 0.0f,
     -0.5f,  0.5f, 0.0f
   };
-  unsigned int indices[] = {
+  std::vector<unsigned int> indices = {
     0, 1, 3,
     1, 2, 3
   };
@@ -23,7 +24,7 @@ int main() {
   std::ifstream fragShader("./src/shaders/basic.frag");
 
   Mesh meshes[] = {
-    Mesh(vertices, 4, indices, 2, &vertShader, &fragShader)
+    Mesh(vertices, indices, vertShader, fragShader)
   };
 
   try {

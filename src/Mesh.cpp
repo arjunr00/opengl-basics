@@ -1,5 +1,7 @@
+#include <cstdarg>
 #include <cstddef>
 #include <fstream>
+#include <vector>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -9,10 +11,9 @@
 /**
  * CONSTRUCTOR
  */
-Mesh::Mesh(float *vertices, std::size_t numVertices,
-             unsigned int *indices, std::size_t numTriangles,
-             std::ifstream *vertShaderFile, std::ifstream *fragShaderFile)
-    : shader(vertShaderFile, fragShaderFile), numTriangles(numTriangles) {
+Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
+             std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile)
+    : shader(vertShaderFile, fragShaderFile), numTriangles(indices.size() / 3) {
 
   // Create vertex array object
   glGenVertexArrays(1, &(this->vertArrObj));
@@ -26,11 +27,11 @@ Mesh::Mesh(float *vertices, std::size_t numVertices,
 
   // Copy vertex array into vertex buffer memory
   glBindBuffer(GL_ARRAY_BUFFER, this->vertBufObj);
-  glBufferData(GL_ARRAY_BUFFER, numVertices * 3 * sizeof(float), vertices, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
   // Copy vertex array into element buffer memory
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->elementBufObj);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, numTriangles * 3 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
   // Define vertex data interpretation
   glVertexAttribPointer(
