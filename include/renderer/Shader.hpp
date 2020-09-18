@@ -7,7 +7,7 @@ class Shader {
   public:
     Shader(std::ifstream *vertShaderFile, std::ifstream *fragShaderFile);
 
-    unsigned int getShaderProgramObjId();
+    void use();
 
   private:
     unsigned int shaderProgram;

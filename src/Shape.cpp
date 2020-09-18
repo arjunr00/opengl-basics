@@ -49,7 +49,7 @@ Shape::Shape(float *vertices, std::size_t numVertices,
  */
 
 void Shape::draw() {
-  glUseProgram(this->shader.getShaderProgramObjId());
+  this->shader.use();
   glBindVertexArray(this->vertArrObj);
   glDrawElements(GL_TRIANGLES, this->numTriangles * 3, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
