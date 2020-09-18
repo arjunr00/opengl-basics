@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <fstream>
+#include <string>
 #include <vector>
 
 #include <renderer/Shader.hpp>
@@ -13,9 +14,12 @@ class Mesh {
           std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile);
 
     void draw();
+    virtual void configureShader() {};
+
+  protected:
+    Shader shader;
 
   private:
-    Shader shader;
     unsigned int vertArrObj;
     unsigned int vertBufObj;
     unsigned int elementBufObj;

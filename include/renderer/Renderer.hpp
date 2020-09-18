@@ -1,6 +1,9 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <string>
+#include <vector>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -8,10 +11,10 @@
 
 class Renderer {
   public:
-    Renderer(const char *windowName, int width, int height);
+    Renderer(std::string windowName, int width, int height);
     ~Renderer();
 
-    void render(Mesh *meshes, std::size_t numMeshes);
+    void render(std::vector<Mesh *> &meshes);
 
   private:
     GLFWwindow *window;

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <vector>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -10,14 +12,14 @@
 /**
  * CONSTRUCTOR 
  */
-Renderer::Renderer(const char *windowName, int width, int height) {
+Renderer::Renderer(std::string windowName, int width, int height) {
   // Initialize window
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   
-  this->window = glfwCreateWindow(width, height, windowName, nullptr, nullptr);
+  this->window = glfwCreateWindow(width, height, windowName.c_str(), nullptr, nullptr);
   if (this->window == nullptr) {
     std::cerr << "Failed to create GLFW window" << std::endl;
     glfwTerminate();
@@ -47,7 +49,7 @@ Renderer::~Renderer() {
  */
 
 /** Render loop */
-void Renderer::render(Mesh *meshes, std::size_t numMeshes) {
+void Renderer::render(std::vector<Mesh *> &meshes) {
 
   while (!glfwWindowShouldClose(window)) {
     this->processInput();
@@ -55,8 +57,8 @@ void Renderer::render(Mesh *meshes, std::size_t numMeshes) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (std::size_t i = 0; i < numMeshes; ++i)
-      meshes[i].draw();
+    for (std::size_t i = 0; i < meshes.size(); ++i)
+      meshes[i]->draw();
 
     glfwSwapBuffers(window);
     glfwPollEvents();

@@ -21,6 +21,73 @@ Shader::Shader(std::ifstream const &vertShaderFile, std::ifstream const &fragSha
  * PUBLIC METHODS
  */
 
+void Shader::setUniform(std::string name, std::vector<float> &values) {
+  int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());
+  switch(values.size()) {
+    case 0:
+      std::cerr << "No floats passed to uniform " << name << "." << std::endl;
+      break;
+    case 1:
+      glUniform1f(vertColorLocation, values[0]);
+      break;
+    case 2:
+      glUniform2f(vertColorLocation, values[0], values[1]);
+      break;
+    case 3:
+      glUniform3f(vertColorLocation, values[0], values[1], values[2]);
+      break;
+    case 4:
+    default:
+      glUniform4f(vertColorLocation, values[0], values[1], values[2], values[3]);
+      break;
+  }
+}
+
+void Shader::setUniform(std::string name, std::vector<int> &values) {
+  int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());
+  switch(values.size()) {
+    case 0:
+      std::cerr << "No ints passed to uniform " << name << "." << std::endl;
+      break;
+    case 1:
+      glUniform1i(vertColorLocation, values[0]);
+      break;
+    case 2:
+      glUniform2i(vertColorLocation, values[0], values[1]);
+      break;
+    case 3:
+      glUniform3i(vertColorLocation, values[0], values[1], values[2]);
+      break;
+    case 4:
+    default:
+      glUniform4i(vertColorLocation, values[0], values[1], values[2], values[3]);
+      break;
+  }
+}
+
+void Shader::setUniform(std::string name, std::vector<bool> &values) {
+  int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());
+  switch(values.size()) {
+    case 0:
+      std::cerr << "No bools passed to uniform " << name << "." << std::endl;
+      break;
+    case 1:
+      glUniform1i(vertColorLocation, (int) values[0]);
+      break;
+    case 2:
+      glUniform2i(vertColorLocation, (int) values[0], (int) values[1]);
+      break;
+    case 3:
+      glUniform3i(vertColorLocation, (int) values[0], (int) values[1], (int) values[2]);
+      break;
+    case 4:
+    default:
+      glUniform4i(vertColorLocation, (int) values[0], (int) values[1], (int) values[2],
+          (int) values[3]);
+      break;
+  }
+}
+
 unsigned int Shader::getShaderProgramObjId() {
   return this->shaderProgram;
 }

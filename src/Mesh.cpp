@@ -1,5 +1,6 @@
 #include <cstdarg>
 #include <cstddef>
+#include <iostream>
 #include <fstream>
 #include <vector>
 
@@ -51,6 +52,7 @@ Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
 
 void Mesh::draw() {
   glUseProgram(this->shader.getShaderProgramObjId());
+  configureShader();
   glBindVertexArray(this->vertArrObj);
   glDrawElements(GL_TRIANGLES, this->numTriangles * 3, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);

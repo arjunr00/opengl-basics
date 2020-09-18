@@ -1,9 +1,9 @@
 #version 330 core
 
-in vec4 vertexColor;
-
 out vec4 outColor;
 
+uniform vec4 uniformColor;
+
 void main() {
-  outColor = vertexColor;
+  outColor = uniformColor;
 }
