@@ -1,7 +1,7 @@
-# OpenGL Tutorial
+# OpenGL Basics
 
 After I gave up on trying to get NVIDIA drivers to work with my Ubuntu installation, I decided to try out OpenGL instead.
-I'm using [this highly recommended tutorial](https://learnopengl.com/).
+I'm loosely following [this highly recommended tutorial](https://learnopengl.com/) to learn how the OpenGL API works with some organizational and operational changes of my own (such as using classes to encapsulate different aspects of drawing, like compiling shaders, drawing a shape, and the actual rendering).
 
 ## How to build
 
