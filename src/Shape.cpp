@@ -6,6 +6,9 @@
 
 #include <renderer/Shape.hpp>
 
+/**
+ * CONSTRUCTOR
+ */
 Shape::Shape(float *vertices, std::size_t numVertices,
              unsigned int *indices, std::size_t numTriangles,
              std::ifstream *vertShaderFile, std::ifstream *fragShaderFile)
@@ -40,6 +43,10 @@ Shape::Shape(float *vertices, std::size_t numVertices,
   );
   glEnableVertexAttribArray(0);
 }
+
+/**
+ * PUBLIC METHODS
+ */
 
 void Shape::draw() {
   glUseProgram(this->shader.getShaderProgramObjId());
