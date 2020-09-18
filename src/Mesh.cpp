@@ -40,10 +40,21 @@ Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
     3 /* Number of components in each attribute */,
     GL_FLOAT /* Data type of each component */,
     GL_FALSE /* Whether data should be normalized */,
-    3 * sizeof(float) /* Byte offset between consecutive attributes */,
+    6 * sizeof(float) /* Byte offset between consecutive attributes */,
     (void *) 0 /* Offset of first component of first attribute in array */
   );
   glEnableVertexAttribArray(0);
+
+  // Define vertex data interpretation
+  glVertexAttribPointer(
+    1 /* Location of vertex attribute in shader */,
+    3 /* Number of components in each attribute */,
+    GL_FLOAT /* Data type of each component */,
+    GL_FALSE /* Whether data should be normalized */,
+    6 * sizeof(float) /* Byte offset between consecutive attributes */,
+    (void *)(3 * sizeof(float)) /* Offset of first component of first attribute in array */
+  );
+  glEnableVertexAttribArray(1);
 }
 
 /**

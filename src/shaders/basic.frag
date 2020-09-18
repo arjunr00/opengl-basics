@@ -1,9 +1,11 @@
 #version 330 core
 
+in vec3 vertColor;
+
 out vec4 outColor;
 
-uniform vec4 uniformColor;
+uniform float multiplier;
 
 void main() {
-  outColor = uniformColor;
+  outColor = vec4(vertColor * multiplier, 1.0);
 }

@@ -17,19 +17,18 @@ class ColorChangingMesh : public Mesh {
 
     void configureShader() override {
       float time = glfwGetTime();
-      float redValue = sin(time) * 0.5f + 0.5f;
-      std::vector<float> colors = { redValue, 0.3f, 0.4f, 1.0f };
-      this->shader.setUniform("uniformColor", colors);
+      std::vector<float> multipliers = { ((float) sin(2 * time)) * 0.25f + 0.75f };
+      this->shader.setUniform("multiplier", multipliers);
     }
 };
 
 int main() {
   Renderer renderer("OpenGL Basics", 800, 600);
   std::vector<float> vertices = {
-     0.5f,  0.5f, -0.5f,
-     0.5f, -0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-    -0.5f,  0.5f, 0.0f
+     0.5f,  0.5f, 0.0f,    0.75f, 0.75f, 0.5f,
+     0.5f, -0.5f, 0.0f,    0.75f, 0.25f, 0.5f,
+    -0.5f, -0.5f, 0.0f,    0.25f, 0.25f, 0.5f,
+    -0.5f,  0.5f, 0.0f,    0.25f, 0.75f, 0.5f,
   };
   std::vector<unsigned int> indices = {
     0, 1, 3,
