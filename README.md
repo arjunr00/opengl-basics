@@ -9,6 +9,9 @@ Make sure [GLFW](https://www.glfw.org/) and [GLM](https://glm.g-truc.net/0.9.9/i
 Then, run `make` to generate the executable.
 Run `make clean` to remove all generated files.
 
+## What it looks like
+![Screenshot_20200917_225548](https://user-images.githubusercontent.com/30734384/93550307-1fc9ea80-f939-11ea-9d5e-9f428f3cf13b.png)
+
 ## Notes
 
 * I used [GLAD](https://github.com/Dav1dde/glad) to generate `include/glad/glad.h`, `include/KHR/khrplatform.h`, and `src/glad.c`.
