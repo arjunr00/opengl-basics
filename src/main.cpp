@@ -9,9 +9,9 @@
 #include <renderer/Renderer.hpp>
 #include <renderer/Mesh.hpp>
 
-class ColorChangingRectangle : public Mesh {
+class ColorChangingMesh : public Mesh {
   public:
-    ColorChangingRectangle(std::vector<float> vertices, std::vector<unsigned int> indices,
+    ColorChangingMesh(std::vector<float> vertices, std::vector<unsigned int> indices,
               std::ifstream &vertShader, std::ifstream &fragShader)
       : Mesh(vertices, indices, vertShader, fragShader) {};
 
@@ -38,7 +38,7 @@ int main() {
   std::ifstream vertShader("./src/shaders/basic.vert");
   std::ifstream fragShader("./src/shaders/basic.frag");
 
-  ColorChangingRectangle rect(vertices, indices, vertShader, fragShader);
+  ColorChangingMesh rect(vertices, indices, vertShader, fragShader);
   std::vector<Mesh *> meshes = { &rect };
 
   try {
