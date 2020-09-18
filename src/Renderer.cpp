@@ -3,9 +3,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <renderer/Mesh.hpp>
 #include <renderer/Renderer.hpp>
 #include <renderer/Shader.hpp>
-#include <renderer/Shape.hpp>
 
 /**
  * CONSTRUCTOR 
@@ -47,7 +47,7 @@ Renderer::~Renderer() {
  */
 
 /** Render loop */
-void Renderer::render(Shape *shapes, std::size_t numShapes) {
+void Renderer::render(Mesh *meshes, std::size_t numMeshes) {
 
   while (!glfwWindowShouldClose(window)) {
     this->processInput();
@@ -55,8 +55,8 @@ void Renderer::render(Shape *shapes, std::size_t numShapes) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (std::size_t i = 0; i < numShapes; ++i)
-      shapes[i].draw();
+    for (std::size_t i = 0; i < numMeshes; ++i)
+      meshes[i].draw();
 
     glfwSwapBuffers(window);
     glfwPollEvents();

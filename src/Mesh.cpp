@@ -4,12 +4,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <renderer/Shape.hpp>
+#include <renderer/Mesh.hpp>
 
 /**
  * CONSTRUCTOR
  */
-Shape::Shape(float *vertices, std::size_t numVertices,
+Mesh::Mesh(float *vertices, std::size_t numVertices,
              unsigned int *indices, std::size_t numTriangles,
              std::ifstream *vertShaderFile, std::ifstream *fragShaderFile)
     : shader(vertShaderFile, fragShaderFile), numTriangles(numTriangles) {
@@ -48,7 +48,7 @@ Shape::Shape(float *vertices, std::size_t numVertices,
  * PUBLIC METHODS
  */
 
-void Shape::draw() {
+void Mesh::draw() {
   this->shader.use();
   glBindVertexArray(this->vertArrObj);
   glDrawElements(GL_TRIANGLES, this->numTriangles * 3, GL_UNSIGNED_INT, 0);

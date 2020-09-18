@@ -4,14 +4,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <renderer/Shape.hpp>
+#include <renderer/Mesh.hpp>
 
 class Renderer {
   public:
     Renderer(const char *windowName, int width, int height);
     ~Renderer();
 
-    void render(Shape *shapes, std::size_t numShapes);
+    void render(Mesh *meshes, std::size_t numMeshes);
 
   private:
     GLFWwindow *window;

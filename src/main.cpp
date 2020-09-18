@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include <renderer/Renderer.hpp>
+#include <renderer/Mesh.hpp>
 
 int main() {
   Renderer renderer("OpenGL Tutorial", 800, 600);
@@ -21,12 +22,12 @@ int main() {
   std::ifstream vertShader("./src/shaders/basic.vert");
   std::ifstream fragShader("./src/shaders/basic.frag");
 
-  Shape shapes[] = {
-    Shape(vertices, 4, indices, 2, &vertShader, &fragShader)
+  Mesh meshes[] = {
+    Mesh(vertices, 4, indices, 2, &vertShader, &fragShader)
   };
 
   try {
-      renderer.render(shapes, 1);
+      renderer.render(meshes, 1);
   } catch(const std::exception& e) {
       std::cerr << e.what() << std::endl;
       return EXIT_FAILURE;

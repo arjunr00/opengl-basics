@@ -6,9 +6,9 @@
 #include <cstddef>
 #include <fstream>
 
-class Shape {
+class Mesh {
   public:
-    Shape(float *vertices, std::size_t numVertices,
+    Mesh(float *vertices, std::size_t numVertices,
           unsigned int *indices, std::size_t numTriangles, 
           std::ifstream *vertShaderFile, std::ifstream *fragShaderFile);
 
