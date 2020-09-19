@@ -11,9 +11,9 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 set(SOURCES
   ${PROJECT_SOURCE_DIR}/src/main.cpp
-  ${PROJECT_SOURCE_DIR}/src/Renderer.cpp
-  ${PROJECT_SOURCE_DIR}/src/Mesh.cpp
-  ${PROJECT_SOURCE_DIR}/src/Shader.cpp)
+  ${PROJECT_SOURCE_DIR}/src/renderer/Renderer.cpp
+  ${PROJECT_SOURCE_DIR}/src/renderer/Mesh.cpp
+  ${PROJECT_SOURCE_DIR}/src/renderer/Shader.cpp)
 
 set(HEADERS
   ${PROJECT_SOURCE_DIR}/include/renderer/Renderer.hpp
