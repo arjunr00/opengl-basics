@@ -1,3 +1,4 @@
 include/glad/* linguist-vendored
 include/KHR/* linguist-vendored
-src/glad.c linguist-vendored
+include/stb/* linguist-vendored
+src/lib/* linguist-vendored
