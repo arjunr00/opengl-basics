@@ -38,9 +38,10 @@ else()
   set(LIBS )
 endif(WIN32)
 
-add_library(GLAD ${PROJECT_SOURCE_DIR}/src/glad.c)
+add_library(GLAD ${PROJECT_SOURCE_DIR}/src/lib/glad.c)
+add_library(STB_IMAGE ${PROJECT_SOURCE_DIR}/src/lib/stb_image.c)
 
-set(LIBS ${LIBS} GLAD)
+set(LIBS ${LIBS} GLAD STB_IMAGE)
 
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${LIBS})

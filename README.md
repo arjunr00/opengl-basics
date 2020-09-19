@@ -40,13 +40,13 @@ An executable name `opengl-basics.exe` will be generated inside `build/Debug/`.
 ## How to run
 
 **Ubuntu:**
-After building, make sure you're at the root of the repository, then type `./build/opengl-basics`.
+After building, make sure you're at the root of the repository, then type `./build/opengl-basics` in a shell.
 
 **Windows:**
-Make a new folder inside `build/Debug` named `src`, then copy the `shaders/` folder from `src` (in the root of the repository) to the aforementioned new folder.
-Then, just run `opengl-basics.exe` from `build/Debug`.
+After building, make sure you're at the root of the repository, then type `./build/Debug/opengl-basics.exe` in a shell.
 
-(NOTE: these are because right now shader files are opened relative to the directory the executable is run from. In the future, I'll have the user supply a shader directory when running the program so that it's more portable.)
+Alternatively, copy the `assets/` folder from the root of the repository to `build/Debug`.
+Then, just run `opengl-basics.exe` from inside `build/Debug`.
 
 ## How to use
 

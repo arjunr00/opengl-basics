@@ -34,8 +34,8 @@ int main() {
     0, 1, 3,
     1, 2, 3
   };
-  std::ifstream vertShader("./src/shaders/basic.vert");
-  std::ifstream fragShader("./src/shaders/basic.frag");
+  std::ifstream vertShader("./assets/shaders/basic.vert");
+  std::ifstream fragShader("./assets/shaders/basic.frag");
 
   ColorChangingMesh rect(vertices, indices, vertShader, fragShader);
   std::vector<Mesh *> meshes = { &rect };
