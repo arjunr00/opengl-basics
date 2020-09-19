@@ -1,0 +1,48 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(opengl-basics VERSION 1.0)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra")
+
+set(SOURCES
+  ${PROJECT_SOURCE_DIR}/src/main.cpp
+  ${PROJECT_SOURCE_DIR}/src/Renderer.cpp
+  ${PROJECT_SOURCE_DIR}/src/Mesh.cpp
+  ${PROJECT_SOURCE_DIR}/src/Shader.cpp)
+
+set(HEADERS
+  ${PROJECT_SOURCE_DIR}/include/renderer/Renderer.hpp
+  ${PROJECT_SOURCE_DIR}/include/renderer/Mesh.hpp
+  ${PROJECT_SOURCE_DIR}/include/renderer/Shader.hpp)
+
+find_package(glm REQUIRED)
+find_package(glfw3 REQUIRED)
+
+if (WIN32)
+  set(LIBS glfw3 opengl32)
+elseif(UNIX AND NOT APPLE)
+  set(OpenGL_GL_PREFERENCE "GLVND")
+  find_package(OpenGL REQUIRED)
+  add_definitions(${OPENGL_DEFINITIONS})
+  find_package(X11 REQUIRED)
+  set(LIBS glfw X11 Xrandr Xi GL dl)
+  set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl")
+elseif(APPLE)
+  # TODO
+else()
+  set(LIBS )
+endif(WIN32)
+
+add_library(GLAD ${PROJECT_SOURCE_DIR}/src/glad.c)
+
+set(LIBS ${LIBS} GLAD)
+
+add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
+target_link_libraries(${PROJECT_NAME} ${LIBS})
+
+include_directories(
+  ${PROJECT_SOURCE_DIR}/src/
+  ${PROJECT_SOURCE_DIR}/include/
+)

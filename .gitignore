@@ -3,6 +3,14 @@ build/
 # Compiled shaders
 *.spv
 
+## Visual Studio
+.vs/
+
+## CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
 ## Config and temp files
 # Vim YouCompleteMe config
 .ycm_extra_conf.py
