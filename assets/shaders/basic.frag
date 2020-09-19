@@ -1,11 +1,12 @@
 #version 330 core
 
 in vec3 vertColor;
+in vec2 texCoord;
 
 out vec4 outColor;
 
-uniform float multiplier;
+uniform sampler2D tex;
 
 void main() {
-  outColor = vec4(vertColor * multiplier, 1.0);
+  outColor = texture(tex, texCoord);
 }

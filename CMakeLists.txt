@@ -13,12 +13,14 @@ set(SOURCES
   ${PROJECT_SOURCE_DIR}/src/main.cpp
   ${PROJECT_SOURCE_DIR}/src/renderer/Renderer.cpp
   ${PROJECT_SOURCE_DIR}/src/renderer/Mesh.cpp
-  ${PROJECT_SOURCE_DIR}/src/renderer/Shader.cpp)
+  ${PROJECT_SOURCE_DIR}/src/renderer/Shader.cpp
+  ${PROJECT_SOURCE_DIR}/src/renderer/Texture.cpp)
 
 set(HEADERS
   ${PROJECT_SOURCE_DIR}/include/renderer/Renderer.hpp
   ${PROJECT_SOURCE_DIR}/include/renderer/Mesh.hpp
-  ${PROJECT_SOURCE_DIR}/include/renderer/Shader.hpp)
+  ${PROJECT_SOURCE_DIR}/include/renderer/Shader.hpp
+  ${PROJECT_SOURCE_DIR}/include/renderer/Texture.hpp)
 
 find_package(glm REQUIRED)
 find_package(glfw3 REQUIRED)

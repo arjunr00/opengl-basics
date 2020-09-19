@@ -7,17 +7,21 @@
 #include <vector>
 
 #include <renderer/Shader.hpp>
+#include <renderer/Texture.hpp>
 
 class Mesh {
   public:
     Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
-          std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile);
+          std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile,
+          std::string const &textureFilename);
 
     void draw();
     virtual void configureShader() {};
+    virtual void configureTexture() {};
 
   protected:
     Shader shader;
+    Texture texture;
 
   private:
     unsigned int vertArrObj;

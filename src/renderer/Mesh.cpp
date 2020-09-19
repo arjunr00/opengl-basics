@@ -8,13 +8,17 @@
 #include <GLFW/glfw3.h>
 
 #include <renderer/Mesh.hpp>
+#include <renderer/Texture.hpp>
 
 /**
  * CONSTRUCTOR
  */
 Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
-             std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile)
-    : shader(vertShaderFile, fragShaderFile), numTriangles(indices.size() / 3) {
+             std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile,
+             std::string const &textureFilename)
+    : shader(vertShaderFile, fragShaderFile),
+      texture(textureFilename),
+      numTriangles(indices.size() / 3) {
 
   // Create vertex array object
   glGenVertexArrays(1, &(this->vertArrObj));
@@ -40,7 +44,7 @@ Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
     3 /* Number of components in each attribute */,
     GL_FLOAT /* Data type of each component */,
     GL_FALSE /* Whether data should be normalized */,
-    6 * sizeof(float) /* Byte offset between consecutive attributes */,
+    8 * sizeof(float) /* Byte offset between consecutive attributes */,
     (void *) 0 /* Offset of first component of first attribute in array */
   );
   glEnableVertexAttribArray(0);
@@ -51,10 +55,21 @@ Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
     3 /* Number of components in each attribute */,
     GL_FLOAT /* Data type of each component */,
     GL_FALSE /* Whether data should be normalized */,
-    6 * sizeof(float) /* Byte offset between consecutive attributes */,
+    8 * sizeof(float) /* Byte offset between consecutive attributes */,
     (void *)(3 * sizeof(float)) /* Offset of first component of first attribute in array */
   );
   glEnableVertexAttribArray(1);
+
+  // Define vertex data interpretation
+  glVertexAttribPointer(
+    2 /* Location of vertex attribute in shader */,
+    2 /* Number of components in each attribute */,
+    GL_FLOAT /* Data type of each component */,
+    GL_FALSE /* Whether data should be normalized */,
+    8 * sizeof(float) /* Byte offset between consecutive attributes */,
+    (void *)(6 * sizeof(float)) /* Offset of first component of first attribute in array */
+  );
+  glEnableVertexAttribArray(2);
 }
 
 /**
@@ -64,6 +79,8 @@ Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
 void Mesh::draw() {
   glUseProgram(this->shader.getShaderProgramObjId());
   configureShader();
+  configureTexture();
+  glBindTexture(GL_TEXTURE_2D, this->texture.getTextureObjId());
   glBindVertexArray(this->vertArrObj);
   glDrawElements(GL_TRIANGLES, this->numTriangles * 3, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
