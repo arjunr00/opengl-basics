@@ -53,7 +53,7 @@ Then, just run `opengl-basics.exe` from inside `build/Debug`.
 Press 1 to switch to filled mode and 2 to switch to wireframe mode. Press Q to close the application.
 
 ## What it looks like
-![opengl-rect](https://user-images.githubusercontent.com/30734384/93632268-0ec1bd80-f9bb-11ea-8b75-ec928ca7a7fa.gif)
+![opengl-basics-img](https://user-images.githubusercontent.com/30734384/93688371-587dd700-fa93-11ea-968c-6dee3e8075e0.png)
 
 ## Notes
 
