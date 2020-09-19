@@ -12,7 +12,7 @@ I'm loosely following [this highly recommended tutorial](https://learnopengl.com
 ## How to build
 
 **Ubuntu:**
-Enter the following commands in a shell at the root of this repository:
+Enter the following commands in a shell at the root of this repository (replacing `build` with whatever directory name you want):
 ```bash
 $ cmake -B build .
 $ make -C build
@@ -26,8 +26,16 @@ $ cmake ..
 $ make
 ```
 
+This will generate a binary named `opengl-basics` inside the `build` folder.
+
 **Windows:**
-_TODO_
+Open the CMake GUI.
+Set the source directory to the root of this repository and set the build directory to a new sub-directory called `build` (or anything you want), then click Configure and follow the steps (I use [vcpkg](https://github.com/microsoft/vcpkg) so I specify its CMake toolchain).
+Once that's done click Generate.
+Inside the `build` folder will be a file name `opengl-basics.sln`.
+Open this in Visual Studio.
+Once everything is loaded, click **Build** > **Build 'opengl-basics'** or press Ctrl-B.
+An executable name `opengl-basics.exe` will be generated inside `build/Debug/`.
 
 ## How to run
 
@@ -35,7 +43,10 @@ _TODO_
 After building, make sure you're at the root of the repository, then type `./build/opengl-basics`.
 
 **Windows:**
-_TODO_
+Make a new folder inside `build/Debug` named `src`, then copy the `shaders/` folder from `src` (in the root of the repository) to the aforementioned new folder.
+Then, just run `opengl-basics.exe` from `build/Debug`.
+
+(NOTE: these are because right now shader files are opened relative to the directory the executable is run from. In the future, I'll have the user supply a shader directory when running the program so that it's more portable.)
 
 ## How to use
 

@@ -2,9 +2,12 @@ cmake_minimum_required(VERSION 3.10)
 
 project(opengl-basics VERSION 1.0)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra")
+
+if (CMAKE_COMPILER_IS_GNUCXX)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wextra")
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 set(SOURCES
   ${PROJECT_SOURCE_DIR}/src/main.cpp
@@ -21,7 +24,7 @@ find_package(glm REQUIRED)
 find_package(glfw3 REQUIRED)
 
 if (WIN32)
-  set(LIBS glfw3 opengl32)
+  set(LIBS glfw opengl32)
 elseif(UNIX AND NOT APPLE)
   set(OpenGL_GL_PREFERENCE "GLVND")
   find_package(OpenGL REQUIRED)
