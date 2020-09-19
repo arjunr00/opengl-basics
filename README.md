@@ -29,12 +29,13 @@ $ make
 This will generate a binary named `opengl-basics` inside the `build` folder.
 
 **Windows:**
-Open the CMake GUI.
-Set the source directory to the root of this repository and set the build directory to a new sub-directory called `build` (or anything you want), then click Configure and follow the steps (I use [vcpkg](https://github.com/microsoft/vcpkg) so I specify its CMake toolchain).
-Once that's done click Generate.
-Inside the `build` folder will be a file name `opengl-basics.sln`.
+1. Open the CMake GUI.
+2. Set the source directory to the root of this repository and set the build directory to a new sub-directory called `build` (or anything you want)
+3. Click Configure and follow the steps (I use [vcpkg](https://github.com/microsoft/vcpkg) so I specify its CMake toolchain).
+4. Once that's done, click Generate.
+5. Inside the `build` folder will be a file name `opengl-basics.sln`.
 Open this in Visual Studio.
-Once everything is loaded, click **Build** > **Build 'opengl-basics'** or press Ctrl-B.
+6. Once everything is loaded, click **Build** > **Build 'opengl-basics'** or press Ctrl-B.
 An executable name `opengl-basics.exe` will be generated inside `build/Debug/`.
 
 ## How to run
@@ -53,7 +54,8 @@ Then, just run `opengl-basics.exe` from inside `build/Debug`.
 Press 1 to switch to filled mode and 2 to switch to wireframe mode. Press Q to close the application.
 
 ## What it looks like
-![opengl-basics-img](https://user-images.githubusercontent.com/30734384/93688371-587dd700-fa93-11ea-968c-6dee3e8075e0.png)
+![opengl-basics-img](https://user-images.githubusercontent.com/30734384/93688430-db9f2d00-fa93-11ea-86c8-bbebe2571dfc.gif)
+
 
 ## Notes
 
