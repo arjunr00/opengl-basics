@@ -15,9 +15,9 @@
  */
 Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
              std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile,
-             std::string const &textureFilename)
+             std::vector<std::string> const &textureFilepaths)
     : shader(vertShaderFile, fragShaderFile),
-      texture(textureFilename),
+      texture(textureFilepaths),
       numTriangles(indices.size() / 3) {
 
   // Create vertex array object
@@ -76,12 +76,22 @@ Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
  * PUBLIC METHODS
  */
 
+void Mesh::preDraw() {
+  glUseProgram(this->shader.getShaderProgramObjId());
+  for (size_t i = 0; i < this->texture.getNumTextures(); ++i) {
+    std::string const texName = "tex" + std::to_string(i);
+    this->shader.setUniform(texName, (int) i /* TODO: don't cast */);
+  }
+}
+
 void Mesh::draw() {
   glUseProgram(this->shader.getShaderProgramObjId());
   configureShader();
   configureTexture();
-  glBindTexture(GL_TEXTURE_2D, this->texture.getTextureObjId());
+  for (size_t i = 0; i < this->texture.getNumTextures(); ++i) {
+    glActiveTexture(GL_TEXTURE0 + i);
+    glBindTexture(GL_TEXTURE_2D, this->texture.getTextureObjId(i));
+  }
   glBindVertexArray(this->vertArrObj);
   glDrawElements(GL_TRIANGLES, this->numTriangles * 3, GL_UNSIGNED_INT, 0);
-  glBindVertexArray(0);
 }

@@ -2,15 +2,19 @@
 #define TEXTURE_H
 
 #include <string>
+#include <vector>
 
 class Texture {
   public:
-    Texture(std::string const &filename);
+    Texture(std::vector<std::string> const &filepaths);
 
-    unsigned int getTextureObjId();
+    size_t getNumTextures();
+    unsigned int getTextureObjId(size_t index);
 
   private:
-    unsigned int texture;
+    std::vector<unsigned int> textures;
+
+    void loadTexture(std::string filepath, size_t textureIndex);
 };
 
 #endif /* #ifndef TEXTURE */

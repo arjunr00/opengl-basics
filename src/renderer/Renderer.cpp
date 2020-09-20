@@ -50,6 +50,8 @@ Renderer::~Renderer() {
 
 /** Render loop */
 void Renderer::render(std::vector<Mesh *> &meshes) {
+  for (std::size_t i = 0; i < meshes.size(); ++i)
+    meshes[i]->preDraw();
 
   while (!glfwWindowShouldClose(window)) {
     this->processInput();

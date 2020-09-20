@@ -8,6 +8,10 @@ class Shader {
   public:
     Shader(std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile);
 
+    void setUniform(std::string name, float value);
+    void setUniform(std::string name, int value);
+    void setUniform(std::string name, bool value);
+
     void setUniform(std::string name, std::vector<float> &values);
     void setUniform(std::string name, std::vector<int> &values);
     void setUniform(std::string name, std::vector<bool> &values);

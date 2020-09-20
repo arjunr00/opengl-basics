@@ -21,6 +21,21 @@ Shader::Shader(std::ifstream const &vertShaderFile, std::ifstream const &fragSha
  * PUBLIC METHODS
  */
 
+void Shader::setUniform(std::string name, float value) {
+  int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());
+  glUniform1f(vertColorLocation, value);
+}
+
+void Shader::setUniform(std::string name, int value) {
+  int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());
+  glUniform1i(vertColorLocation, value);
+}
+
+void Shader::setUniform(std::string name, bool value) {
+  int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());
+  glUniform1i(vertColorLocation, (int) value);
+}
+
 void Shader::setUniform(std::string name, std::vector<float> &values) {
   int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());
   switch(values.size()) {

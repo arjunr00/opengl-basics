@@ -13,8 +13,9 @@ class Mesh {
   public:
     Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
           std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile,
-          std::string const &textureFilename);
+          std::vector<std::string> const &textureFilenames);
 
+    void preDraw();
     void draw();
     virtual void configureShader() {};
     virtual void configureTexture() {};
