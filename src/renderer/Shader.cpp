@@ -4,22 +4,44 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <renderer/Shader.hpp>
 
 /**
  * CONSTRUCTOR
  */
-Shader::Shader(std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile) {
+Shader::Shader(std::ifstream &vertShaderFile, std::ifstream &fragShaderFile) {
+
   std::stringstream vertShaderSrcBuf, fragShaderSrcBuf;
   vertShaderSrcBuf << vertShaderFile.rdbuf();
   fragShaderSrcBuf << fragShaderFile.rdbuf();
   this->compileShaders(vertShaderSrcBuf.str().c_str(), fragShaderSrcBuf.str().c_str());
+  vertShaderFile.clear();
+  vertShaderFile.seekg(0, vertShaderFile.beg);
+  fragShaderFile.clear();
+  fragShaderFile.seekg(0, fragShaderFile.beg);
 }
 
 /**
  * PUBLIC METHODS
  */
+
+void Shader::setModel(glm::mat4 model) {
+  unsigned int modelLocation = glGetUniformLocation(this->shaderProgram, "model");
+  glUniformMatrix4fv(modelLocation, 1, GL_FALSE /* transpose? */, glm::value_ptr(model));
+}
+
+void Shader::setView(glm::mat4 view) {
+  unsigned int viewLocation = glGetUniformLocation(this->shaderProgram, "view");
+  glUniformMatrix4fv(viewLocation, 1, GL_FALSE /* transpose? */, glm::value_ptr(view));
+}
+
+void Shader::setProjection(glm::mat4 projection) {
+  unsigned int projLocation = glGetUniformLocation(this->shaderProgram, "projection");
+  glUniformMatrix4fv(projLocation, 1, GL_FALSE /* transpose? */, glm::value_ptr(projection));
+}
 
 void Shader::setUniform(std::string name, float value) {
   int vertColorLocation = glGetUniformLocation(this->shaderProgram, name.c_str());

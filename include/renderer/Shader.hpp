@@ -4,9 +4,15 @@
 #include <fstream>
 #include <vector>
 
+#include <glm/glm.hpp>
+
 class Shader {
   public:
-    Shader(std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile);
+    Shader(std::ifstream &vertShaderFile, std::ifstream &fragShaderFile);
+
+    void setModel(glm::mat4 model);
+    void setView(glm::mat4 view);
+    void setProjection(glm::mat4 projection);
 
     void setUniform(std::string name, float value);
     void setUniform(std::string name, int value);

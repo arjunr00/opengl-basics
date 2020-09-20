@@ -6,6 +6,9 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <renderer/Mesh.hpp>
 #include <renderer/Texture.hpp>
@@ -14,10 +17,14 @@
  * CONSTRUCTOR
  */
 Mesh::Mesh(std::vector<float> &vertices, std::vector<unsigned int> &indices,
-             std::ifstream const &vertShaderFile, std::ifstream const &fragShaderFile,
+             std::ifstream &vertShaderFile, std::ifstream &fragShaderFile,
              std::vector<std::string> const &textureFilepaths)
     : shader(vertShaderFile, fragShaderFile),
       texture(textureFilepaths),
+      model(1.0f),
+      // TODO: parametrize these
+      view(glm::translate(glm::mat4(10.f), glm::vec3(0.0f, 0.0f, -3.0f))),
+      projection(glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f)),
       numTriangles(indices.size() / 3) {
 
   // Create vertex array object
@@ -82,16 +89,30 @@ void Mesh::preDraw() {
     std::string const texName = "tex" + std::to_string(i);
     this->shader.setUniform(texName, (int) i /* TODO: don't cast */);
   }
+  this->shader.setView(this->view);
+  this->shader.setProjection(this->projection);
 }
 
 void Mesh::draw() {
   glUseProgram(this->shader.getShaderProgramObjId());
-  configureShader();
-  configureTexture();
+  this->update();
   for (size_t i = 0; i < this->texture.getNumTextures(); ++i) {
     glActiveTexture(GL_TEXTURE0 + i);
     glBindTexture(GL_TEXTURE_2D, this->texture.getTextureObjId(i));
   }
+  this->shader.setModel(this->model);
   glBindVertexArray(this->vertArrObj);
   glDrawElements(GL_TRIANGLES, this->numTriangles * 3, GL_UNSIGNED_INT, 0);
+}
+
+void Mesh::translate(glm::vec3 vector) {
+  this->model = glm::translate(this->model, vector);
+}
+
+void Mesh::rotate(float angle, glm::vec3 axis) {
+  this->model = glm::rotate(this->model, angle, axis);
+}
+
+void Mesh::scale(glm::vec3 vector) {
+  this->model = glm::scale(this->model, vector);
 }

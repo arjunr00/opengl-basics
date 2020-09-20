@@ -35,6 +35,8 @@ Renderer::Renderer(std::string windowName, int width, int height) {
   glViewport(0, 0, 800, 600);
   
   glfwSetFramebufferSizeCallback(this->window, this->framebufferSizeCallback);
+
+  glEnable(GL_DEPTH_TEST);
 }
 
 /**
@@ -57,7 +59,7 @@ void Renderer::render(std::vector<Mesh *> &meshes) {
     this->processInput();
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     for (std::size_t i = 0; i < meshes.size(); ++i)
       meshes[i]->draw();

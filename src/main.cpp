@@ -5,6 +5,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 #include <renderer/Renderer.hpp>
 #include <renderer/Mesh.hpp>
@@ -12,14 +13,12 @@
 class TexturedMesh : public Mesh {
   public:
     TexturedMesh(std::vector<float> vertices, std::vector<unsigned int> indices,
-              std::ifstream const &vertShader, std::ifstream const &fragShader,
+              std::ifstream &vertShader, std::ifstream &fragShader,
               std::vector<std::string> const &textureFilepaths)
       : Mesh(vertices, indices, vertShader, fragShader, textureFilepaths) {};
 
-    void configureShader() override {
-      float time = glfwGetTime();
-      std::vector<float> multipliers = { ((float) sin(2 * time)) * 0.25f + 0.75f };
-      this->shader.setUniform("multiplier", multipliers);
+    void update() override {
+      this->rotate(glm::radians(1.0f), glm::vec3(0.5f, 1.0f, 0.0f));
     }
 };
 
@@ -28,14 +27,28 @@ int main() {
     Renderer renderer("OpenGL Basics", 800, 600);
     std::vector<float> vertices = {
       // positions           // colors             // textures
-       0.5f,  0.5f,  0.0f,    1.00f, 0.00f, 0.00f,   1.0f, 1.0f,  // top right
-       0.5f, -0.5f,  0.0f,    0.00f, 0.70f, 0.00f,   1.0f, 0.0f,  // bottom right
-      -0.5f, -0.5f,  0.0f,    0.00f, 0.70f, 0.00f,   0.0f, 0.0f,  // bottom left
-      -0.5f,  0.5f,  0.0f,    1.00f, 0.00f, 0.00f,   0.0f, 1.0f   // top left
+       0.5f,  0.5f,  0.5f,    1.00f, 1.00f, 1.00f,   1.0f, 1.0f,  // front top right
+       0.5f, -0.5f,  0.5f,    1.00f, 1.00f, 1.00f,   1.0f, 0.0f,  // front bottom right
+      -0.5f, -0.5f,  0.5f,    1.00f, 1.00f, 1.00f,   0.0f, 0.0f,  // front bottom left
+      -0.5f,  0.5f,  0.5f,    1.00f, 1.00f, 1.00f,   0.0f, 1.0f,  // front top left
+       0.5f,  0.5f, -0.5f,    1.00f, 1.00f, 1.00f,   0.0f, 1.0f,  // back top right
+       0.5f, -0.5f, -0.5f,    1.00f, 1.00f, 1.00f,   0.0f, 0.0f,  // back bottom right
+      -0.5f, -0.5f, -0.5f,    1.00f, 1.00f, 1.00f,   1.0f, 0.0f,  // back bottom left
+      -0.5f,  0.5f, -0.5f,    1.00f, 1.00f, 1.00f,   1.0f, 1.0f   // back top left
     };
     std::vector<unsigned int> indices = {
       0, 1, 3,
-      1, 2, 3
+      1, 2, 3,
+      0, 1, 4,
+      1, 4, 5,
+      0, 3, 4,
+      3, 4, 7,
+      2, 3, 6,
+      3, 6, 7,
+      1, 2, 6,
+      1, 5, 6,
+      5, 6, 7,
+      4, 5, 7
     };
     std::ifstream vertShader("./assets/shaders/basic.vert");
     std::ifstream fragShader("./assets/shaders/basic.frag");
@@ -44,8 +57,20 @@ int main() {
       "./assets/textures/laugh.png",
     };
 
-    TexturedMesh rect(vertices, indices, vertShader, fragShader, textureFilepaths);
-    std::vector<Mesh *> meshes = { &rect };
+    TexturedMesh cube1(vertices, indices, vertShader, fragShader, textureFilepaths);
+    cube1.scale(glm::vec3(0.7f, 0.7f, 0.7f));
+    cube1.rotate(30, glm::vec3(1.0f, 0.0f, 0.0f));
+    cube1.translate(glm::vec3(-2.0f, 0.3f, -1.0f));
+    TexturedMesh cube2(vertices, indices, vertShader, fragShader, textureFilepaths);
+    cube2.translate(glm::vec3(0.0f, -0.2f, 1.0f));
+    cube2.rotate(60, glm::vec3(0.0f, 1.0f, 0.0f));
+    TexturedMesh cube3(vertices, indices, vertShader, fragShader, textureFilepaths);
+    cube2.scale(glm::vec3(0.3f, 0.3f, 0.3f));
+    cube3.translate(glm::vec3(1.0f, 0.5f, 0.0f));
+
+    std::vector<Mesh *> meshes = {
+      &cube1, &cube2, &cube3
+    };
 
     renderer.render(meshes);
   } catch(std::exception const &e) {
